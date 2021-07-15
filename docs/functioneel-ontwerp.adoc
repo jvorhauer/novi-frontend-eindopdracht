@@ -1,0 +1,15 @@
+= Eindopdracht NOVI Frontend
+
+Dit is de implementatie van de eindopdracht van de NOVI HBO Software Development Frontend module.
+*Het* is best leuk.
+_italic_
+https://edhub.novi.nl
+
+== Section 1
+
+Text of Section 1
+
+== Section 2
+
+Text of section 2
+

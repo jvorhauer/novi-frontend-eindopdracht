@@ -1,0 +1,65 @@
+@startuml
+
+(*) --> "
+{{
+salt
+{
+  Noviaal
+  Welkom
+  Wat is Noviaal
+  Contact
+  Registreer
+  Login
+}
+}}
+" as home
+
+home --> "
+{{
+salt
+{+
+  "Gebruikersnaam"
+  "Wachtwoord"
+  ..
+  [Login]
+}
+}}
+" as login
+
+home -right-> "
+{{
+salt
+{+
+  "Gebruikersnaam"
+  "Wachtwoord"
+  "Herhaal wachtwoord"
+  ..
+  [Registreer]
+}
+}}
+" as registreer
+
+registreer --> login
+
+login --> "
+{{
+salt
+{
+  gebruikers lijst
+  tags lijst
+  notes lijst
+}
+}}
+" as mynotes
+
+mynotes --> "
+{{
+salt
+{+
+titel | "title"
+body  | "body"
+}
+}}
+" as edit
+
+@enduml

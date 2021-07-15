@@ -1,0 +1,71 @@
+= Noviaal Frontend Installatie
+:toc: macro
+
+|======
+| Instelling    | NOVI HBO Software Development
+| Leerlijn      | FrontEnd 2021/03
+| Document      | Installatie Handleiding
+| Docent        | Nova Eeken / Rein op 't Land
+| Datum         | 18 juli 2021
+| Auteur        | Jurjen Vorhauer
+| Email         | J.Vorhauer@novi-education.nl
+| Studentnummer | 800009793
+| GitHub        | https://github.com/jvorhauer/novi-frontend-eindopdracht
+| *Noviaal*     | Een Twitterig platform, de naam is een samentrekking van NOVI en Sociaal
+|======
+
+<<<
+
+toc::[]
+
+<<<
+
+== Inleiding
+
+Noviaal is een React applicatie. Voor het uitvoeren van de applicatie wordt gebruik gemaakt van https://nodejs.org/en/[Node.js] met de daarmee meegeleverde 'package manager' `npm`.
+
+== Voorwaarden
+
+Voor de Noviaal applicatie uitgevoerd kan worden is dus eerst een installatie van `Node.js` nodig. De handleiding is hier: https://nodejs.org/en/download/
+
+**NB**: voor de installatie en het uitvoeren van Noviaal en benodigdheden is een actieve internet verbinding noodzakelijk.
+
+=== Node JS
+
+Voor **Windows** kan men gebruik maken van de https://nodejs.org/dist/v14.17.3/node-v14.17.3-x64.msi[Installer (64-bit)]. Na het downloaden kan dit `msi` bestand uitgevoerd worden. Na het starten van deze installer wordt de gebruiker middels eenvoudige stappen door de installatie geleid.
+
+Voor **Mac** gaat de voorkeur uit naar installeren via https://brew.sh[Homebrew]:
+
+[source]
+----
+brew install node
+----
+
+Indien een installatie via Homebrew niet gewenst is, dan kan het https://nodejs.org/dist/v14.17.3/node-v14.17.3.pkg[installatie pakket] gebruikt worden. Na het starten van dit package wordt de gebruiker middels eenvoudige stappen door de installatie geleid.
+
+=== installeren
+
+Het `ZIP` bestand met dit project dient uitgepakt te worden in een nieuwe folder/directory.
+
+== Uitvoeren
+
+Via een `Windows Command Prompt`, `PowerShell` of `Mac Terminal` kan de app nu gestart worden met `npm start`. Dit commando dient uitgevoerd te worden in de folder/directory waar zich hert bestand `package.json` bevindt.
+
+Open nu een nieuwe tab of window in een browser en navigeer naar http://localhost:3000[Noviaal lokaal].
+
+== Gebruik
+
+Ondanks dat dit bestand `installatie handleiding` heet, toch een korte gebruiksaanwijzing voor Noviaal.
+
+=== registreren
+
+=== inloggen
+
+=== notities
+
+=== nieuwe notitie
+
+=== wijzigen notitie
+
+=== verwijderen notitie
+

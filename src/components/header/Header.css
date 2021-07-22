@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  background: linear-gradient(#ABD0CF, #79ABAA);
+  width: 1000px;
+  margin: auto;
+  border-radius: 2px 2px 0 0;
+  color: white;
+  padding: 20px;
+  align-items: center;
+  /*justify-content: flex-end;*/
+}
+
+header .menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+header .auth {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}

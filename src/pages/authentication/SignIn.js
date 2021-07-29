@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import './Auth.css';
 
 function SignIn() {
   const { handleSubmit, register } = useForm();
@@ -26,10 +27,10 @@ function SignIn() {
   }
 
   return (
-    <>
-      <h1>Inloggen</h1>
+    <div className="center">
+      <h1>Aanmelden</h1>
       <p>
-        Aanmelden met email adres en wachtwoord waarmee u geregistreerd hebt.
+        met email adres en wachtwoord waarmee u geregistreerd hebt.
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -61,7 +62,7 @@ function SignIn() {
         Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan
         eerst.
       </p>
-    </>
+    </div>
   );
 }
 

@@ -1,42 +1,45 @@
-import React, {useContext} from "react";
-import {Link, useHistory} from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import "./Header.css";
 
-function Header() {
-  const history = useHistory();
+const Header = () => {
+  const { pathname } = useLocation();
+  const path = pathname.split("/")[1];
   const {user, logout} = useContext(AuthContext);
+
+  function activate(here) {
+    return path === here ? "active" : "";
+  }
 
   return (
     <header>
-      {!user && (
-        <>
-          <div className="menu">
-            <Link to="/">Home</Link>&nbsp;
-          </div>
-          <div className="auth">
-            <button type="button" onClick={() => history.push("/signin")}>
-              Aanmelden
-            </button>
-            <button type="button" onClick={() => history.push("/signup")}>
-              Registreren
-            </button>
-          </div>
-        </>
-      )}
-      {user && (
-        <>
-          <div className="menu">
-            <Link to="/">Home</Link>&nbsp;
-            <Link to="/profile">Mijn notities</Link>&nbsp;
-            <Link to="/add">Nieuwe notitie</Link>&nbsp;
-          </div>
-          <div className="auth">
-            <strong>Aangemeld als {user.username}</strong>&nbsp;
-            (<a href="/" onClick={() => logout()}>afmelden</a>)
-          </div>
-        </>
-      )}
+      <div class="logo">
+        <Link to="/">
+          <img src="/logo_transparent.png" alt="Noviaal" />
+        </Link>
+      </div>
+      <nav>
+        {!user && (
+          <ul>
+            <li><Link className={activate("")} to="/">Home</Link></li>
+            <li><Link className={activate("signin")} to="/signin">Aanmelden</Link></li>
+            <li><Link className={activate("signup")} to="/signup">Registreren</Link></li>
+          </ul>
+        )}
+        {user && (
+          <ul>
+            <li><Link className={activate("")} to="/profile">Home</Link></li>
+            <li><Link className={activate("add")} to="/add">Nieuwe notitie</Link></li>
+            <li><Link className={activate("users")} to="/users">Gebruikers</Link></li>
+            <li><span class="spacer"></span></li>
+            <li>
+              <strong>Aangemeld als {user.username}</strong>&nbsp;
+              <a href="/" onClick={() => logout()}>afmelden</a>
+            </li>
+          </ul>
+        )}
+      </nav>
     </header>
   );
 }

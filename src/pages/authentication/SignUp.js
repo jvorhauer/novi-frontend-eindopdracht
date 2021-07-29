@@ -47,7 +47,7 @@ function SignUp() {
   }
 
   return (
-    <>
+    <div className="center">
       <h1>Registreren</h1>
       <p>
         Om toegang te krijgen tot je eigen notities en die van de andere Noviaal
@@ -108,7 +108,7 @@ function SignUp() {
         Heb je al een account? Je kunt dan direct{" "}
         <Link to="/signin">aanmelden</Link> .
       </p>
-    </>
+    </div>
   );
 }
 

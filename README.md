@@ -15,3 +15,4 @@ Het prototype is te vinden in de folder prototype in de documentatie folder.
 * [React Router](https://reactrouter.com/web/example/custom-link)
 * [React Training - Router](https://reacttraining.com/blog/react-router-v5-1/)
 * [React Markdown](https://github.com/remarkjs/react-markdown)
+* [HMTL5 Layout](https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/)

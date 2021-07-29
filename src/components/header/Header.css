@@ -7,17 +7,43 @@ header {
   color: white;
   padding: 20px;
   align-items: center;
-  /*justify-content: flex-end;*/
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-header .menu {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-}
-
-header .auth {
-  flex: 1;
-  display: flex;
+header nav {
   justify-content: flex-end;
+}
+
+header nav ul {
+  flex: 1;
+  display: flex;
+  list-style: none;
+}
+
+header nav ul li {
+  margin-right: 10px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: blue;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: red;
+}
+
+header div img {
+  height: 100px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.spacer {
+  padding-right: 50px;
 }

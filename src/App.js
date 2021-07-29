@@ -8,8 +8,9 @@ import SignIn from "./pages/authentication/SignIn";
 import SignUp from "./pages/authentication/SignUp";
 import AddNote from "./pages/notes/AddNote";
 import ViewNote from "./pages/notes/ViewNote";
-
+import ListUsers from "./pages/users/ListUsers";
 import "./App.css";
+import ListNotes from "./pages/notes/ListNotes";
 
 
 function App() {
@@ -21,8 +22,12 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/profile">
+          <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route path="/profile/:id" component={ListNotes} />
+          <Route exact path="/users">
+            <ListUsers />
           </Route>
           <Route exact path="/signin">
             <SignIn />
@@ -30,7 +35,7 @@ function App() {
           <Route exact path="/signup">
             <SignUp />
           </Route>
-          <Route path="/add">
+          <Route exact path="/add">
             <AddNote />
           </Route>
           <Route path="/view/:id" component={ViewNote} />

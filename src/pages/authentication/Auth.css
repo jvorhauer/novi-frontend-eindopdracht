@@ -1,0 +1,23 @@
+.center {
+  margin: auto;
+  width: 70%;
+}
+
+form {
+  margin: auto;
+  width: 90%;
+  padding: -10px;
+  margin-top: 15px;
+}
+
+h1, p {
+  margin: auto;
+  width: 80%;
+}
+
+button {
+  margin-top: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: larger;
+}

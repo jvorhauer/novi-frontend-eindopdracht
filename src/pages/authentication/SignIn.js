@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import makeUrl from '../../helpers/MakeUrl';
 import './Auth.css';
 
 function SignIn() {
@@ -14,11 +15,7 @@ function SignIn() {
     console.log(data);
     setError("");
     try {
-      const result = await axios.post(
-        "https://sheltered-gorge-50410.herokuapp.com/api/auth/login",
-        data
-      );
-      console.log("result", result);
+      const result = await axios.post(makeUrl("/api/auth/login"), data);
       login(result.data.token);
     } catch (e) {
       console.error(e);

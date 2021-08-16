@@ -5,11 +5,26 @@
 }
 
 body {
-  background-color: #F4ECE5;
+  background-color: #F4F7F7;
   display: flex;
   justify-content: center;
   color: #33312F;
-  padding-top: 50px;
+  padding-top: 20px;
+  font-family: helvetica neue, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+.container {
+  width: 90rem;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.page {
+  width: 100%;
 }
 
 button {
@@ -50,6 +65,7 @@ h2 {
 }
 
 .content {
+  width: 100%;
   max-width: 1000px;
   margin: auto;
   padding: 20px;
@@ -66,7 +82,7 @@ button.form-button {
 }
 
 section {
-  margin: 0 0 50px 0;
+  margin: 0 0 15px 0;
 }
 
 

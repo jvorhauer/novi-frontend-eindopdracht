@@ -2,28 +2,24 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import makeUrl from '../../helpers/MakeUrl'
+import makeHeaders from '../../helpers/MakeHeaders'
 
 function ListUsers() {
   const [privateContent, setPrivateContent] = useState(null);
+  const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function getUsers() {
+      setError("");
       try {
-        const result = await axios.get(
-          "https://sheltered-gorge-50410.herokuapp.com/api/users",
-          {
-            headers: {
-              "Accept": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log("users", result.data);
+        const result = await axios.get(makeUrl('/api/users'), makeHeaders(token));
         setPrivateContent(result.data);
       } catch (e) {
         console.error(e);
+        setError(`Ophalen van gebruikers is niet gelukt (${e})`);
       }
     }
     if (token && user) {
@@ -31,10 +27,17 @@ function ListUsers() {
     }
   }, [token, user]);
 
-
   return (
     <>
-      {user && privateContent &&
+      {error &&
+        <section>
+          <h2>Foutje</h2>
+          <p>
+            {error}
+          </p>
+        </section>
+      }
+      {user && !error && privateContent &&
       <section>
         <h2>Gebruikers</h2>
         <table>
@@ -47,7 +50,7 @@ function ListUsers() {
           </thead>
           <tbody>
           {
-            privateContent.map((usr) => (
+            privateContent.content.map((usr) => (
               <tr key={usr.id}>
                 <td><Link to={{pathname: `/profile/${usr.id}`}}>{usr.name}</Link></td>
                 <td>{usr.email}</td>
@@ -56,6 +59,13 @@ function ListUsers() {
             ))
           }
           </tbody>
+          <tfoot>
+          <tr>
+            <td>&lt;</td>
+            <td>Pagina {privateContent.number + 1} van {privateContent.totalPages}</td>
+            <td>&gt;</td>
+          </tr>
+          </tfoot>
         </table>
       </section>
       }

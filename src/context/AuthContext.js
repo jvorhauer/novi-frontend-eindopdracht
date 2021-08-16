@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import makeUrl from '../helpers/MakeUrl';
+import makeHeaders from '../helpers/MakeHeaders';
 
 export const AuthContext = createContext({});
 
@@ -25,8 +27,7 @@ function AuthContextProvider({ children }) {
     const token = localStorage.getItem("token");
 
     if (!authState.user && token && isTokenValid(token)) {
-      const decodedToken = jwt_decode(token);
-      fetchUserData(token, decodedToken.sub);
+      fetchUserData(token);
     } else {
       setAuthState({
         user: null,
@@ -37,37 +38,28 @@ function AuthContextProvider({ children }) {
 
   function login(jwtToken) {
     console.log("login", jwtToken);
-    localStorage.setItem("token", jwtToken);
-    const decodedToken = jwt_decode(jwtToken);
-    console.log("decoded token", decodedToken);
-    const userId = decodedToken.sub;
+    if (isTokenValid(jwtToken)) {
+      localStorage.setItem("token", jwtToken);
 
-    fetchUserData(jwtToken, userId);
+      fetchUserData(jwtToken);
+    }
   }
 
   function logout() {
     const token = localStorage.getItem("token")
     if (token) {
       localStorage.removeItem("token")
-      setAuthState({
-        user: null,
-        status: "done",
-      });
     }
+    setAuthState({
+      user: null,
+      status: "done",
+    });
+    console.log("status", authState.status);
   }
 
-  async function fetchUserData(token, id) {
+  async function fetchUserData(token) {
     try {
-      const result = await axios.get(
-        `https://sheltered-gorge-50410.herokuapp.com/api/users/me`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(result);
+      const result = await axios.get(makeUrl('/api/users/me'), makeHeaders(token));
       setAuthState({
         user: {
           username: result.data.name,

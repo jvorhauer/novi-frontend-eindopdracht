@@ -1,0 +1,38 @@
+.menu {
+  flex: 0 0 16rem;
+}
+
+.menu nav {
+  width: 16rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.menu nav ul {
+  list-style: none;
+}
+
+ul li {
+  padding-left: 10px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: blue;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: red;
+}
+
+img {
+  width: 16rem;
+  object-fit: revert;
+}

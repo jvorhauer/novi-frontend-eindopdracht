@@ -1,54 +1,63 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import {Link} from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-
+import React, {useContext, useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext";
+import makeUrl from '../../helpers/MakeUrl'
+import makeHeaders from '../../helpers/MakeHeaders'
 import './Profile.css';
 import './Notes.css';
-import configuration from '../../config.json';
 
 function Profile() {
   const [privateContent, setPrivateContent] = useState(null);
-  const { user } = useContext(AuthContext);
+  const [otherUser, setOtherUser] = useState(null);
+  const [error, setError] = useState("");
+  const {user} = useContext(AuthContext);
+  const {id, page} = useParams();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    setError("");
+    if (!user) {
+      return;
+    }
+    const pageNr = page ? page : 0;
+    const url = id ? makeUrl(`/api/notes/user/${id}?page=${pageNr}`) : makeUrl(`/api/users/timeline?page=${pageNr}`);
+    const userId = id ? id : user.id;
+
     async function getPrivateContent() {
       try {
-        const result = await axios.get(
-          configuration.backend + '/api/notes',
-          {
-            headers: {
-              "Accept": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setPrivateContent(result.data);
+        const notes = await axios.get(url, makeHeaders(token));
+        setPrivateContent(notes.data);
+
+        const other = await axios.get(makeUrl(`/api/users/${userId}`), makeHeaders(token));
+        setOtherUser(other.data);
       } catch (e) {
         console.error(e);
+        setError(`Ophalen van notities is niet gelukt (${e})`);
+        setPrivateContent(null);
       }
     }
+
     if (token && user) {
       getPrivateContent();
     }
-  }, [token, user]);
+  }, [token, user, id, page]);
 
   return (
     <>
       <section>
-        {user && (
+        {!error && otherUser && (
           <>
             <h2>Mijn Gegevens</h2>
             <p>
-              <strong>Gebruikersnaam:</strong> {user.username} ({user.id})
+              <strong>Gebruikersnaam:</strong> {otherUser.username} ({otherUser.id})
             </p>
             <p>
-              <strong>Email:</strong> {user.email}
+              <strong>Email:</strong> {otherUser.email}
             </p>
           </>
         )}
-        {!user && (
+        {!error && !user && (
           <>
             <h2>U bent niet aangemeld!</h2>
             <p>
@@ -60,10 +69,21 @@ function Profile() {
             </p>
           </>
         )}
+        {error && (
+          <>
+            <h2 className="error">Oeps</h2>
+            <p>
+              Er is iets niet helemaal goed gegaan tijdens het ophalen van m'n notities
+            </p>
+            <p>
+              (foutmelding: ${error})
+            </p>
+          </>
+        )}
       </section>
-      {user && privateContent && (
+      {user && otherUser && privateContent && (
         <section>
-          <h2>Mijn notities</h2>
+          <h2>Mijn {privateContent.totalElements} notities</h2>
           <table>
             <thead>
             <tr>
@@ -74,7 +94,7 @@ function Profile() {
             </thead>
             <tbody>
             {
-              privateContent.map((note) => (
+              privateContent.content.map((note) => (
                 <tr key={note.id}>
                   <td><Link to={{pathname: `/view/${note.id}`}}>{note.title}</Link></td>
                   <td>{note.created}</td>
@@ -83,6 +103,13 @@ function Profile() {
               ))
             }
             </tbody>
+            <tfoot>
+            <tr>
+              <td><Link to={{pathname: `/profile/${otherUser.id}/${privateContent.number - 1}`}}>&lt;</Link></td>
+              <td>Pagina {privateContent.number + 1} van {privateContent.totalPages}</td>
+              <td><Link to={{pathname: `/profile/${otherUser.id}/${privateContent.number + 1}`}}>&gt;</Link></td>
+            </tr>
+            </tfoot>
           </table>
         </section>
       )}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import makeUrl from '../../helpers/MakeUrl';
 
 function SignUp() {
   const { handleSubmit, register } = useForm();
@@ -21,13 +22,8 @@ function SignUp() {
       toggleRegisterSuccess(false);
     } else {
       try {
-        const result = await axios.post(
-          "https://sheltered-gorge-50410.herokuapp.com/api/auth/register",
-          {
-            email: data.email,
-            password: data.password,
-            name: data.username,
-          }
+        const result = await axios.post(makeUrl("/api/auth/register"),
+          { email: data.email, password: data.password, name: data.username, }
         );
         console.log("result", result);
         toggleRegisterSuccess(true);
@@ -98,15 +94,13 @@ function SignUp() {
         </button>
         {registerSuccess && (
           <p>
-            Registreren is gelukt! Je wordt nu doorgestuurd naar de inlog
-            pagina!
+            Registreren is gelukt! Je wordt nu doorgestuurd naar de inlog pagina!
           </p>
         )}
         {error && <p className="error-message">{error}</p>}
       </form>
       <p>
-        Heb je al een account? Je kunt dan direct{" "}
-        <Link to="/signin">aanmelden</Link> .
+        Heb je al een account? Je kunt dan direct{" "}<Link to="/signin">aanmelden</Link> .
       </p>
     </div>
   );

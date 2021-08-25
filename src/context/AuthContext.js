@@ -16,6 +16,9 @@ function AuthContextProvider({ children }) {
   const history = useHistory();
 
   function isTokenValid(jwtToken) {
+    if (!jwtToken) {
+      return false;
+    }
     const decodedToken = jwt_decode(jwtToken);
     const expirationUnix = decodedToken.exp;
     const now = new Date().getTime();
@@ -25,8 +28,7 @@ function AuthContextProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
-    if (!authState.user && token && isTokenValid(token)) {
+    if (!authState.user && isTokenValid(token)) {
       fetchUserData(token);
     } else {
       setAuthState({
@@ -34,13 +36,12 @@ function AuthContextProvider({ children }) {
         status: "done",
       });
     }
-  }, []);
+  }, []);     // warning here: missing dependencies, which when included make the app completely unusable.
 
   function login(jwtToken) {
     console.log("login", jwtToken);
     if (isTokenValid(jwtToken)) {
       localStorage.setItem("token", jwtToken);
-
       fetchUserData(jwtToken);
     }
   }
@@ -57,21 +58,20 @@ function AuthContextProvider({ children }) {
     console.log("status", authState.status);
   }
 
-  async function fetchUserData(token) {
-    try {
-      const result = await axios.get(makeUrl('/api/users/me'), makeHeaders(token));
-      setAuthState({
-        user: {
-          username: result.data.name,
-          email: result.data.email,
-          id: result.data.id,
-        },
-        status: "done",
-      });
-      history.push("/profile");
-    } catch (e) {
-      console.error(e);
-    }
+  function fetchUserData(token) {
+    axios.get(makeUrl('/api/users/me'), makeHeaders(token))
+      .then(result => {
+        setAuthState({
+          user: {
+            username: result.data.name,
+            email: result.data.email,
+            id: result.data.id,
+          },
+          status: "done",
+        });
+        history.push("/profile");
+      })
+      .catch(e => console.error(e));
   }
 
   const data = {

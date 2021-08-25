@@ -1,75 +1,68 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import makeUrl from '../../helpers/MakeUrl'
-import makeHeaders from '../../helpers/MakeHeaders'
+import makeUrl from '../../helpers/MakeUrl';
+import makeHeaders from '../../helpers/MakeHeaders';
+import './ListUsers.css';
 
 function ListUsers() {
   const [privateContent, setPrivateContent] = useState(null);
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
+  const { page } = useParams();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    async function getUsers() {
+    function getUsers() {
       setError("");
-      try {
-        const result = await axios.get(makeUrl('/api/users'), makeHeaders(token));
-        setPrivateContent(result.data);
-      } catch (e) {
-        console.error(e);
-        setError(`Ophalen van gebruikers is niet gelukt (${e})`);
-      }
+      axios.get(makeUrl(`/api/users?page=${page ? page : 0}&size=19`), makeHeaders(token))
+        .then(result =>
+          setPrivateContent(result.data))
+        .catch(error => {
+          console.error(error);
+          setError(`Ophalen van gebruikers is niet gelukt (${error})`)
+        });
     }
+
     if (token && user) {
       getUsers();
     }
-  }, [token, user]);
+  }, [token, user, page]);
 
   return (
-    <>
+    <div className="content content-left">
       {error &&
-        <section>
-          <h2>Foutje</h2>
+        <article className="user-error-card">
+          <h3>Foutje</h3>
           <p>
             {error}
           </p>
-        </section>
+        </article>
       }
-      {user && !error && privateContent &&
-      <section>
-        <h2>Gebruikers</h2>
-        <table>
-          <thead>
-          <tr>
-            <th>Naam</th>
-            <th>Email</th>
-            <th>Sinds</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            privateContent.content.map((usr) => (
-              <tr key={usr.id}>
-                <td><Link to={{pathname: `/profile/${usr.id}`}}>{usr.name}</Link></td>
-                <td>{usr.email}</td>
-                <td>{usr.joined}</td>
-              </tr>
-            ))
-          }
-          </tbody>
-          <tfoot>
-          <tr>
-            <td>&lt;</td>
-            <td>Pagina {privateContent.number + 1} van {privateContent.totalPages}</td>
-            <td>&gt;</td>
-          </tr>
-          </tfoot>
-        </table>
-      </section>
-      }
-    </>
+      {user && !error && privateContent && (
+        privateContent.content.map((usr) => (
+          <article className={`user-card ${usr.id === user.id ? 'self' : ''}`} key={usr.id}>
+            <h3>
+              {usr.id === user.id && (
+                <Link to="/profile">{usr.name}</Link>
+              )}
+              {usr.id !== user.id && (
+                <Link to={{ pathname: `/profile/${usr.id}` }}>{usr.name}</Link>
+              )}
+            </h3>
+            <dl>
+              <dt>Sinds</dt>
+              <dd>{usr.joined}</dd>
+              <dt>Email adres</dt>
+              <dd>{usr.email}</dd>
+              <dt>Aantal notities</dt>
+              <dd>{usr.noteCount}</dd>
+            </dl>
+          </article>
+        ))
+      )}
+    </div>
   )
 }
 

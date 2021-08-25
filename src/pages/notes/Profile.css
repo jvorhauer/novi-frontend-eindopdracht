@@ -1,17 +1,90 @@
-table {
-  border-collapse: collapse;
+.note-card {
+  flex: 0 0 17%;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 8px;
 }
 
-table thead tr th {
-  text-align: left;
-  border-bottom: 1px solid green;
+.note-card h3 {
+  color: #aacfd0;
 }
 
-tr:hover {
-  background-color: #f5f5f5;
+.wider-note-card {
+  flex: 0 0 34%;
+  background-color: #aacfd0;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 8px;
+}
+.wider-note-card h3 {
+  color: white;
 }
 
-table tbody tr td {
+.user {
+  background-color: #aacfd0;
+  color: white;
+}
+
+.user h3 {
+  color: white;
+}
+
+.note-error-card {
+  flex: 1 0 50%;
+  background-color: lightpink;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 5px;
+}
+
+dt {
+  font-weight: bold;
+}
+dd {
+  padding-left: 10px;
+}
+
+.touchy {
+  cursor: pointer;
+}
+
+.comment-form {
+  background-color: white;
+  padding: 0;
+  width: 100%;
+}
+
+.note-form {
+  background-color: #aacfd0;
+  color: white;
+  padding: 0;
+  width: 100%;
+}
+
+.editor {
+  float: right;
+}
+
+textarea {
   padding: 2px;
+}
 
+form input {
+  padding: 2px;
+}
+
+.next {
+  text-align: right;
+  display: block;
+}
+.prev {
+  float: left;
 }

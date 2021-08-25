@@ -1,111 +1,201 @@
 import axios from "axios";
-import React, {useContext, useState, useEffect} from "react";
-import ReactMarkdown from 'react-markdown';
-import {Link, useHistory, useParams} from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
-import {useForm} from "react-hook-form";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useForm } from "react-hook-form";
+import makeUrl from "../../helpers/MakeUrl";
+import makeHeaders from "../../helpers/MakeHeaders";
+import './Profile';
 
-function ViewNote({match}) {
-  const {user} = useContext(AuthContext);
-  const {id} = useParams();
+function ViewNote() {
+  const { user } = useContext(AuthContext);
+  const { id, mode } = useParams();
   const [privateContent, setPrivateContent] = useState(null);
   const token = localStorage.getItem("token");
-  const {handleSubmit, register} = useForm();
-
-  function BackButton({children}) {
-    let history = useHistory();
-    return (
-      <button type="button" onClick={() => history.goBack()}>
-        {children}
-      </button>
-    )
-  }
+  const { reset } = useForm();
+  const [updated, setUpdated] = useState(true);
 
   useEffect(() => {
-    async function getNote() {
-      try {
-        const result = await axios.get(
-          `https://sheltered-gorge-50410.herokuapp.com/api/notes/${id}`,
-          {
-            headers: {
-              "Accept": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        console.log("result.data", result.data);
-        setPrivateContent(result.data);
-      } catch (e) {
-        console.error(e);
-      }
+    function getNote() {
+      axios.get(makeUrl(`/api/notes/${id}`), makeHeaders(token))
+        .then(result => setPrivateContent(result.data))
+        .catch(error => console.error(error));
     }
 
     if (token && id) {
       getNote();
+      reset({
+        comment: "",
+      })
     }
-  }, [token, id]);
+    setUpdated(false);
+  }, [token, id, updated, mode]);
 
-  async function onSubmit(data) {
-    console.log("comment: data", data);
-    try {
-      const result = await axios.post(
-        `https://sheltered-gorge-50410.herokuapp.com/api/notes/${id}/comments`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("comment: result", result);
-    } catch (e) {
-      console.error(e);
+
+  const NoteUpdateForm = () => {
+    const { handleSubmit, register } = useForm();
+    const history = useHistory();
+
+    reset({
+      comment: "",
+      title: privateContent.title,
+      body: privateContent.body
+    })
+
+    const onSubmit = data => {
+      const payload = {
+        title: data.title,
+        body: data.body,
+        userId: user.id
+      }
+      axios.put(makeUrl(`/api/notes/${id}`), payload, makeHeaders(token))
+        .then(result => {
+          reset({
+            comment: "",
+            title: privateContent.title,
+            body: privateContent.body
+          })
+        })
+        .catch(error => console.error(error));
+      history.push(`/view/${id}/view`);
     }
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)} className="note-form">
+        <label htmlFor="note-title-field">
+          Titel:
+          <input type="text"
+            id="note-title-field"
+            size="20"
+            name="title"
+            {...register("title", { maxLength: 255, required: true })} />
+        </label>
+        <label htmlFor="note-body-field">
+          Notitie:<br />
+          <textarea id="note-body-field"
+            cols="32"
+            rows="5"
+            name="body"
+            {...register("body", { maxLength: 1024, required: true })}
+          />
+        </label>
+        <button type="submit" className="form-button">Bewaar</button>
+      </form>
+    );
   }
 
-  return (
-    <>
-      {user && privateContent && (
-        <>
-          <h1>id is {id}</h1>
-          <h3>title: {privateContent.title}</h3>
-          <strong>Created: {privateContent.created}</strong><br />
-          <strong>Updated: {privateContent.updated}</strong><br />
-          <strong>User: {privateContent.name}</strong><br />
-          <ReactMarkdown>{privateContent.body}</ReactMarkdown>
-        </>
-      )}
+  const CommentForm = () => {
+    const { handleSubmit, register } = useForm();
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+    const onSubmit = data => {
+      const payload = {
+        comment: data.comment,
+        stars: data.stars
+      };
+      axios.post(makeUrl(`/api/notes/${id}/comments`), payload, makeHeaders(token))
+        .then(result => setUpdated(true))
+        .catch(error => console.error(error));
+    }
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)} className="comment-form">
         <label htmlFor="comment-field">
           Commentaar:
           <input
             type="text"
             id="comment-field"
+            size="20"
             name="comment"
-            {...register("comment")} />
+            placeholder="commentaar"
+            {...register("comment", { required: true, minLength: 10, maxLength: 100 })} />
         </label>
         <label htmlFor="stars-field">
-          Waardering:
+          Waardering:<br />
           <select {...register("stars")}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="1">1 ster</option>
+            <option value="2">2 sterren</option>
+            <option value="3">3 sterren</option>
+            <option value="4">4 sterren</option>
+            <option value="5">5 sterren</option>
           </select>
         </label>
         <button type="submit" className="form-button">
-          Inschieten
+          Lever
         </button>
       </form>
+    );
+  }
 
-        <br />
-      <Link to="/profile">Notities</Link>
-      <br />
-      <BackButton>Terug</BackButton>
-    </>
+
+  const Stars = (props) => {
+    return (
+      <>
+        <i className={`${props.rating > 0 ? "fas" : "far"} fa-star`}></i>
+        <i className={`${props.rating > 1 ? "fas" : "far"} fa-star`}></i>
+        <i className={`${props.rating > 2 ? "fas" : "far"} fa-star`}></i>
+        <i className={`${props.rating > 3 ? "fas" : "far"} fa-star`}></i>
+        <i className={`${props.rating > 4 ? "fas" : "far"} fa-star`}></i>
+      </>
+    );
+  }
+
+  return (
+    <div className="content content-left">
+      {user && privateContent && (
+        <>
+          {mode === "view" && (
+            <article className="wider-note-card">
+              <h3>
+                <i className="far fa-file-alt"></i>&nbsp;{privateContent.title}
+                {privateContent.userId === user.id && (
+                  <Link to={`/view/${privateContent.id}/edit`} className="editor"><i className="far fa-edit"></i></Link>
+                )}
+              </h3>
+              <dl>
+                <dt>auteur</dt>
+                <dd>{privateContent.username}</dd>
+                <dt>gecreerd</dt>
+                <dd>{privateContent.created}</dd>
+                <dt>laatst gewijzigd</dt>
+                <dd>{privateContent.updated}</dd>
+                <dt>Tekst</dt>
+                <dd>{privateContent.body}</dd>
+              </dl>
+            </article>
+          )}
+          {mode === "edit" && (
+            <article className="wider-note-card">
+              <h3>
+                Bewerk [{privateContent.title}]
+                <Link to={`/view/${privateContent.id}/view`} className="editor"><i className="far fa-window-close"></i></Link>
+              </h3>
+              <NoteUpdateForm />
+            </article>
+          )}
+
+          {privateContent.comments.map((comment) => (
+            <article className="note-card" key={comment.created} title={`Een notitie van ${comment.author}`}>
+              <h3><i className="far fa-comment"></i>&nbsp;{comment.author}</h3>
+              <dl>
+                <dt>Wanneer</dt>
+                <dd>{comment.created}</dd>
+                <dt>Wat</dt>
+                <dd>{comment.comment}</dd>
+                <dt>Waardering</dt>
+                <dd><Stars rating={`${comment.stars}`} /></dd>
+              </dl>
+            </article>
+          ))}
+
+          {mode === "view" && (
+            <article className="note-card">
+              <h3><i className="fas fa-comment-medical"></i>&nbsp;Meer commentaar</h3>
+              <CommentForm />
+            </article>
+          )}
+        </>
+      )}
+    </div>
   );
 }
 

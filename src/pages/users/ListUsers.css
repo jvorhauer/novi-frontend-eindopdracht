@@ -1,0 +1,53 @@
+.user-card {
+  flex: 0 0 17%;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 8px;
+}
+
+.user-card h3 {
+  color: #aacfd0;
+}
+
+.user-card h3 a {
+  text-decoration: none;
+  color: #aacfd0;
+}
+
+.user-card h3 a:hover {
+  text-decoration: underline;
+}
+
+.self {
+  background-color: #aacfd0;
+  color: white;
+}
+
+.self h3 {
+  color: white;
+}
+
+.self h3 a {
+  color: white;
+
+}
+
+.user-error-card {
+  flex: 1 0 50%;
+  background-color: lightpink;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 8px;
+}
+
+dt {
+  font-weight: bold;
+}
+dd {
+  padding-left: 10px;
+}

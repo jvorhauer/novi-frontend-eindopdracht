@@ -3,7 +3,8 @@ function makeHeaders(token) {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Access-Control-Allow-Origin': '*'
     }
   }
 }

@@ -6,25 +6,21 @@
 
 body {
   background-color: #F4F7F7;
-  display: flex;
   justify-content: center;
   color: #33312F;
-  padding-top: 20px;
-  font-family: helvetica neue, Helvetica, Arial, sans-serif;
+  font-family: 'Titillium Web',helvetica neue, Helvetica, Arial, sans-serif;
   font-size: 15px;
+}
+
+main {
+  display: grid;
+  width: 80%;
+  margin: 20px auto auto;
 }
 
 .container {
   width: 90rem;
   margin: 0 auto;
-}
-
-.flex {
-  display: flex;
-}
-
-.page {
-  width: 100%;
 }
 
 button {
@@ -60,15 +56,15 @@ form input {
   margin: 6px 0;
 }
 
-h2 {
-  margin: 32px 0 24px 0;
-}
-
 .content {
-  width: 100%;
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+.content-left {
+  justify-content: flex-start;
 }
 
 button.form-button {

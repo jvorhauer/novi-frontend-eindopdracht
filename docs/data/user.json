@@ -1,0 +1,20 @@
+[
+  {
+    "id": "81386868-96f0-4b1e-8d4f-51f853c29ec5",
+    "name": "Bilbo",
+    "email": "bilbo@hobbiton.shire",
+    "joined": "2021-06-03 17:06:30",
+    "noteCount": 0,
+    "follows": 0,
+    "followed": 1
+  },
+  {
+    "id": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+    "name": "Pippin",
+    "email": "pippin@tuckborough.shire",
+    "joined": "2021-06-03 17:07:11",
+    "noteCount": 6,
+    "follows": 1,
+    "followed": 0
+  }
+]

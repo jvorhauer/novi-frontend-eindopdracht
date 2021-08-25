@@ -1,0 +1,14 @@
+.home-card {
+  flex: 1 0 23%;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 5px;
+  text-align: center;
+}
+
+.home-card ul {
+  list-style-type: none;
+}

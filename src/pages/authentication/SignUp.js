@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import React, {useState} from "react";
+import {Link, useHistory} from "react-router-dom";
+import {useForm} from "react-hook-form";
 import axios from "axios";
 import makeUrl from '../../helpers/MakeUrl';
 
 function SignUp() {
-  const { handleSubmit, register } = useForm();
+  const {handleSubmit, register} = useForm();
   const [loading, toggleLoading] = useState(false);
   const [error, setError] = useState("");
   const [registerSuccess, toggleRegisterSuccess] = useState(false);
   const history = useHistory();
 
-  async function onSubmit(data) {
+  function onSubmit(data) {
     setError("");
     toggleLoading(true);
 
@@ -21,29 +21,22 @@ function SignUp() {
       setError("Password en nogmaals zijn niet gelijk!");
       toggleRegisterSuccess(false);
     } else {
-      try {
-        const result = await axios.post(makeUrl("/api/auth/register"),
-          { email: data.email, password: data.password, name: data.username, }
-        );
-        console.log("result", result);
+      axios.post(makeUrl("/api/auth/register"),
+        {email: data.email, password: data.password, name: data.username,}
+      ).then(result => {
         toggleRegisterSuccess(true);
-        setTimeout(() => {
-          history.push("/signin");
-        }, 2000);
-      } catch (e) {
+        history.push("/signin");
+      }).catch(e => {
         console.error(e);
-        setError(
-          `Het registreren is mislukt! (${e.message}); probeer het opnieuw`
-        );
-        console.log("exception", e.message, error);
+        setError(`Het registreren is mislukt! (${e.message}); probeer het opnieuw`);
         toggleRegisterSuccess(false);
-      }
+      });
     }
     toggleLoading(false);
   }
 
   return (
-    <div className="center">
+    <div className="content">
       <h1>Registreren</h1>
       <p>
         Om toegang te krijgen tot je eigen notities en die van de andere Noviaal

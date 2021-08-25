@@ -1,0 +1,127 @@
+{
+  "content": [
+    {
+      "id": "97ec5d05-67f6-4a02-9ded-b6b52c54c4a3",
+      "created": "2021-07-06 16:10:42",
+      "updated": "2021-07-06 16:10:42",
+      "username": "Pippin",
+      "userId": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+      "tags": "",
+      "likes": "0",
+      "title": "Nog een keer",
+      "body": "Er was eens een klein meisje met een rood kopje (koffie natuurlijk)",
+      "contentType": "Note",
+      "comments": []
+    },
+    {
+      "id": "9cd270ba-1a17-4a46-b35e-bbb641fd5de1",
+      "created": "2021-07-06 16:10:59",
+      "updated": "2021-07-06 16:10:59",
+      "username": "Pippin",
+      "userId": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+      "tags": "",
+      "likes": "0",
+      "title": "Nog een keer",
+      "body": "Er was eens een klein meisje met een rood kopje (koffie natuurlijk)",
+      "contentType": "Note",
+      "comments": []
+    },
+    {
+      "id": "af56e07b-9dd3-452d-bc3f-f3772e728143",
+      "created": "2021-07-20 15:28:23",
+      "updated": "2021-07-20 15:28:23",
+      "username": "Pippin",
+      "userId": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+      "tags": "",
+      "likes": "0",
+      "title": "Markdown test",
+      "body": "# Een body met **markdown** en zo",
+      "contentType": "Note",
+      "comments": []
+    },
+    {
+      "id": "398fd169-3d1d-4dc6-85fb-c841f4c9a413",
+      "created": "2021-07-20 16:06:10",
+      "updated": "2021-07-20 16:06:10",
+      "username": "Pippin",
+      "userId": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+      "tags": "",
+      "likes": "0",
+      "title": "Meer down met mark",
+      "body": "# Mark\n is down\n\n## En dat is natuurlijk niet leuk...",
+      "contentType": "Note",
+      "comments": []
+    },
+    {
+      "id": "9ac78baf-eff4-4207-ab86-2d24f071fc49",
+      "created": "2021-07-06 16:34:41",
+      "updated": "2021-07-20 16:41:04",
+      "username": "Pippin",
+      "userId": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+      "tags": "",
+      "likes": "0",
+      "title": "Voor vandaag de laatste",
+      "body": "Eens kijken of nu wel de correct Note eruit komt (max ipv min is eigenlijk best logisch)",
+      "contentType": "Note",
+      "comments": [
+        {
+          "comment": "Met sterretjes",
+          "created": "2021-07-20 16:41:04",
+          "author": "Pippin",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": "be93fc71-7bf7-4cab-8161-8332e3f8bc42",
+      "created": "2021-06-03 17:14:30",
+      "updated": "2021-08-10 16:08:29",
+      "username": "Pippin",
+      "userId": "1df84df2-add5-4b25-8b5f-4ddc587ba0f6",
+      "tags": "",
+      "likes": "0",
+      "title": "Geen test meer",
+      "body": "Nog steeds een test eigenlijk...",
+      "contentType": "Note",
+      "comments": [
+        {
+          "comment": "Dit is commentaar",
+          "created": "2021-07-18 11:59:09",
+          "author": "Pippin",
+          "stars": 5
+        },
+        {
+          "comment": "Welnu, dat is mooi!",
+          "created": "2021-08-10 16:08:29",
+          "author": "Jurjen",
+          "stars": 1
+        }
+      ]
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 20,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 6,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "first": true,
+  "numberOfElements": 6,
+  "empty": false
+}

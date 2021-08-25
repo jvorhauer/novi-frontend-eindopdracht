@@ -21,3 +21,30 @@ button {
   padding-bottom: 15px;
   font-size: larger;
 }
+
+.signin-card {
+  flex: 0 0 37%;
+  background-color: #aacfd0;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 3px gray;
+  margin: 8px;
+  padding: 8px;
+  margin-top: 40px;
+}
+.signin-card h3 {
+  margin-left: 40px;
+}
+.signin-card p {
+  width: 90%;
+  margin-left: 40px;
+}
+.signin-card form {
+  background-color: #aacfd0;
+  width: 80%;
+  padding: 0 0 10px;
+  margin-left: 40px;
+  margin-right: 0;
+  margin-top: 5px;
+}

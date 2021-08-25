@@ -6,7 +6,7 @@ import "./Header.css";
 const Header = () => {
   const { pathname } = useLocation();
   const path = pathname.split("/")[1];
-  const {user, logout} = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   function activate(here) {
     return path === here ? "active" : "";
@@ -15,20 +15,29 @@ const Header = () => {
   return (
     <header>
       <nav>
-        {!user && (
-          <ul>
-            <li><Link className={activate("signin")} to="/signin">Aanmelden</Link></li>
-            <li><Link className={activate("signup")} to="/signup">Registreren</Link></li>
-          </ul>
-        )}
-        {user && (
-          <ul>
-            <li>
-              <strong>Aangemeld als {user.username}</strong>&nbsp;
-              <a href="/" onClick={() => logout()}>afmelden</a>
-            </li>
-          </ul>
-        )}
+        <ul>
+          <li className="bigger">
+            <i className="fas fa-user-edit"></i>
+          </li>
+          {!user && (
+            <>
+              <li><Link className={activate("signin")} to="/signin">Aanmelden</Link></li>
+              <li><Link className={activate("signup")} to="/signup">Registreren</Link></li>
+            </>
+          )}
+          {user && (
+            <>
+              <li><Link className={activate("")} to="/">Home</Link></li>
+              <li><Link className={activate("profile")} to="/profile">Notities</Link></li>
+              <li><Link className={activate("add")} to="/add">Nieuwe notitie</Link></li>
+              <li><Link className={activate("users")} to="/users">Gebruikers</Link></li>
+              <li className="loggedin">
+                <strong>Aangemeld als {user.username}</strong>&nbsp;
+                <a href="/" onClick={() => logout()}>afmelden</a>
+              </li>
+            </>
+          )}
+        </ul>
       </nav>
     </header>
   );

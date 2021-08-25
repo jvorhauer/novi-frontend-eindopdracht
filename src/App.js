@@ -6,7 +6,6 @@ import Profile from "./pages/notes/Profile";
 import Home from "./pages/home/Home";
 import SignIn from "./pages/authentication/SignIn";
 import SignUp from "./pages/authentication/SignUp";
-import AddNote from "./pages/notes/AddNote";
 import ViewNote from "./pages/notes/ViewNote";
 import ListUsers from "./pages/users/ListUsers";
 import "./App.css";
@@ -33,9 +32,6 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <SignUp />
-          </Route>
-          <Route exact path="/add">
-            <AddNote />
           </Route>
           <Route path="/view/:id/:mode" component={ViewNote} />
         </Switch>

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { useForm } from "react-hook-form";
 import makeUrl from '../../helpers/MakeUrl'
 import makeHeaders from '../../helpers/MakeHeaders'
 import './Profile.css';
@@ -90,6 +91,49 @@ function Profile() {
     history.push(`/view/${id}/view`);
   }
 
+  const NewNoteForm = () => {
+    const { handleSubmit, register } = useForm();
+
+    const onSubmit = data => {
+      const payload = {
+        title: data.title,
+        body: data.body
+      }
+      axios.post(makeUrl("/api/notes"), payload, makeHeaders(token))
+        .then(result => {
+          console.log("add note result", result);
+          history.go(0);
+        })
+        .catch(error => console.error(error));
+    }
+
+    return (
+      <form id="new-note-form" onSubmit={handleSubmit(onSubmit)} className="note-form">
+        <label htmlFor="note-title-field">
+          Titel:
+          <input
+            type="text"
+            id="note-title-field"
+            size="20"
+            name="title"
+            {...register("title", { maxLength: 255, required: true })} />
+        </label>
+        <label htmlFor="note-body-field">
+          Notitie:<br />
+          <textarea
+            id="note-body-field"
+            cols="32"
+            rows="5"
+            name="body"
+            {...register("body", { maxLength: 1024, required: true })}
+          />
+        </label>
+        <button type="submit" className="form-button">Bewaar</button>
+      </form>
+    );
+  }
+
+
   return (
     <div className="content content-left">
       {!error && otherUser && privateContent && (
@@ -116,18 +160,20 @@ function Profile() {
               <dt>Aantal</dt>
               <dd>
                 <table>
-                  <tr>
-                    <td>notities</td>
-                    <td>{otherUser.noteCount}</td>
-                  </tr>
-                  <tr>
-                    <td>volgers</td>
-                    <td>{otherUser.followed}</td>
-                  </tr>
-                  <tr>
-                    <td>volgt</td>
-                    <td>{otherUser.follows}</td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <td>notities</td>
+                      <td>{otherUser.noteCount}</td>
+                    </tr>
+                    <tr>
+                      <td>volgers</td>
+                      <td>{otherUser.followed}</td>
+                    </tr>
+                    <tr>
+                      <td>volgt</td>
+                      <td>{otherUser.follows}</td>
+                    </tr>
+                  </tbody>
                 </table>
               </dd>
             </dl>
@@ -184,7 +230,14 @@ function Profile() {
               </article>
             ))
           }
-          <article className="note-card">
+          {user.id === otherUser.id &&
+            <article className="wider-note-card">
+              <h3>Nieuwe notitie</h3>
+              <NewNoteForm />
+            </article>
+          }
+
+          <article className="note-card flex-right">
             <h3 className="next"><i className="fas fa-arrow-right"></i></h3>
             <dl>
               <dt>Ga naar</dt>

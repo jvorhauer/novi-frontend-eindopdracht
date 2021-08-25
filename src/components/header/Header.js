@@ -29,7 +29,6 @@ const Header = () => {
             <>
               <li><Link className={activate("")} to="/">Home</Link></li>
               <li><Link className={activate("profile")} to="/profile">Notities</Link></li>
-              <li><Link className={activate("add")} to="/add">Nieuwe notitie</Link></li>
               <li><Link className={activate("users")} to="/users">Gebruikers</Link></li>
               <li className="loggedin">
                 <strong>Aangemeld als {user.username}</strong>&nbsp;

@@ -1,5 +1,5 @@
 .note-card {
-  flex: 0 0 17%;
+  flex: 0 0 18%;
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -13,7 +13,7 @@
 }
 
 .wider-note-card {
-  flex: 0 0 35%;
+  flex: 0 0 37%;
   background-color: #aacfd0;
   color: white;
   border: 1px solid white;
@@ -74,6 +74,7 @@ dd {
 }
 
 textarea {
+  width: 100%;
   padding: 2px;
 }
 
@@ -93,4 +94,8 @@ form input {
   background-color: #aacfd0;
   color: white;
   cursor: pointer;
+}
+
+.flex-right {
+  float: right;
 }

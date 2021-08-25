@@ -32,10 +32,6 @@ button {
   font-weight: bold;
 }
 
-button + button {
-  margin-left: 8px;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -62,6 +58,7 @@ form input {
   margin: 0;
   padding: 0;
   justify-content: center;
+  margin-left: 40px;
 }
 .content-left {
   justify-content: flex-start;

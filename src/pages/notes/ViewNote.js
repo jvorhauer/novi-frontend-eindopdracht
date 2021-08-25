@@ -22,7 +22,7 @@ function ViewNote() {
         .catch(error => console.error(error));
     }
 
-    if (token && id) {
+    if (token && id && mode) {
       getNote();
       reset({
         comment: "",
@@ -33,14 +33,11 @@ function ViewNote() {
 
 
   const NoteUpdateForm = () => {
-    const { handleSubmit, register } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const history = useHistory();
 
-    reset({
-      comment: "",
-      title: privateContent.title,
-      body: privateContent.body
-    })
+    setValue('title', privateContent.title);
+    setValue('body', privateContent.body);
 
     const onSubmit = data => {
       const payload = {
@@ -48,6 +45,7 @@ function ViewNote() {
         body: data.body,
         userId: user.id
       }
+      console.log("data", data, "payload", payload);
       axios.put(makeUrl(`/api/notes/${id}`), payload, makeHeaders(token))
         .then(result => {
           reset({
@@ -61,14 +59,13 @@ function ViewNote() {
     }
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="note-form">
+      <form id="update-note-form" onSubmit={handleSubmit(onSubmit)} className="note-form">
         <label htmlFor="note-title-field">
           Titel:
-          <input type="text"
-            id="note-title-field"
-            size="20"
+          <input
             name="title"
-            {...register("title", { maxLength: 255, required: true })} />
+            {...register('title', { maxLength: 255, required: true })}
+          />
         </label>
         <label htmlFor="note-body-field">
           Notitie:<br />
@@ -76,7 +73,7 @@ function ViewNote() {
             cols="32"
             rows="5"
             name="body"
-            {...register("body", { maxLength: 1024, required: true })}
+            {...register('body', { maxLength: 1024, required: true })}
           />
         </label>
         <button type="submit" className="form-button">Bewaar</button>

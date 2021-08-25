@@ -13,7 +13,7 @@
 }
 
 .wider-note-card {
-  flex: 0 0 34%;
+  flex: 0 0 35%;
   background-color: #aacfd0;
   color: white;
   border: 1px solid white;
@@ -87,4 +87,10 @@ form input {
 }
 .prev {
   float: left;
+}
+
+.follow-button button {
+  background-color: #aacfd0;
+  color: white;
+  cursor: pointer;
 }

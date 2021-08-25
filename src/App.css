@@ -81,6 +81,9 @@ section {
   margin: 0 0 15px 0;
 }
 
+.centered {
+  justify-content: center;
+}
 
 @keyframes rotating {
   from {

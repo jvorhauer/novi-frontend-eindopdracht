@@ -17,7 +17,7 @@ const Header = () => {
       <nav>
         <ul>
           <li className="bigger">
-            <i className="fas fa-user-edit"></i>
+            <i className="fas fa-user-edit" title="Noviaal"></i>&nbsp;Noviaal
           </li>
           {!user && (
             <>

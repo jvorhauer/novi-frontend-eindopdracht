@@ -58,6 +58,7 @@ function ListUsers() {
               <dd>{usr.email}</dd>
               <dt>Aantal notities</dt>
               <dd>{usr.noteCount}</dd>
+              <dt></dt>
             </dl>
           </article>
         ))

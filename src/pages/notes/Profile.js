@@ -10,11 +10,34 @@ import './Notes.css';
 function Profile() {
   const [privateContent, setPrivateContent] = useState(null);
   const [otherUser, setOtherUser] = useState(null);
+  const [followed, setFollowed] = useState(false);
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const { id, page } = useParams();
   const token = localStorage.getItem("token");
   const history = useHistory();
+
+  const FollowButton = (id) => {
+    const handleClick = () => {
+      console.log("FollowButton.handleClick: id:", id.id);
+      setError("");
+      axios.post(makeUrl(`/api/users/follow/${id.id}`), {}, makeHeaders(token))
+        .then(result => {
+          console.log("followed", result);
+          setFollowed(true);
+        }).catch(error => {
+          console.error(error);
+          setError(`Volgen is niet gelukt (${error})`);
+          setFollowed(false);
+        });
+    }
+
+    return (
+      <button onClick={() => handleClick()}>
+        <i className="fas fa-user-plus"></i>&nbsp;volg
+      </button>
+    );
+  }
 
   useEffect(() => {
     function getPrivateContent() {
@@ -84,17 +107,38 @@ function Profile() {
             </dl>
           </article>
           <article className="note-card user">
-            <h3><i className="fas fa-user"></i></h3>
+            <h3><i className="fas fa-user"></i>&nbsp;{otherUser.name} {otherUser.id === user.id ? " (zelf)" : ""}</h3>
             <dl>
-              <dt>Gebruiker</dt>
-              <dd>{otherUser.name} {otherUser.id === user.id ? " (zelf)" : ""}</dd>
               <dt>Sinds</dt>
               <dd>{otherUser.joined}</dd>
               <dt>Email adres</dt>
               <dd>{otherUser.email}</dd>
-              <dt>Aantal notities</dt>
-              <dd>{otherUser.noteCount}</dd>
+              <dt>Aantal</dt>
+              <dd>
+                <table>
+                  <tr>
+                    <td>notities</td>
+                    <td>{otherUser.noteCount}</td>
+                  </tr>
+                  <tr>
+                    <td>volgers</td>
+                    <td>{otherUser.followed}</td>
+                  </tr>
+                  <tr>
+                    <td>volgt</td>
+                    <td>{otherUser.follows}</td>
+                  </tr>
+                </table>
+              </dd>
             </dl>
+            {otherUser.id !== user.id && !followed &&
+              <div className="follow-button">
+                <FollowButton id={otherUser.id} />
+              </div>
+            }
+            {otherUser.id !== user.id && followed &&
+              <p>U volgt nu {otherUser.name}</p>
+            }
           </article>
         </>
       )}

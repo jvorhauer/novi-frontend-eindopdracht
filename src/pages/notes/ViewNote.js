@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import makeUrl from "../../helpers/MakeUrl";
 import makeHeaders from "../../helpers/MakeHeaders";
+import NotSignedIn from "../../components/errors/NotSignedIn";
 import './Profile';
 
 function ViewNote() {
@@ -29,6 +30,7 @@ function ViewNote() {
       })
     }
     setUpdated(false);
+    // eslint-disable-next-line
   }, [token, id, updated, mode]);
 
 
@@ -138,6 +140,9 @@ function ViewNote() {
 
   return (
     <div className="content content-left">
+      {!user && (
+        <NotSignedIn />
+      )}
       {user && privateContent && (
         <>
           {mode === "view" && (

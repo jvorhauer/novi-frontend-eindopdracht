@@ -16,6 +16,7 @@ main {
   display: grid;
   width: 80%;
   margin: 20px auto auto;
+  padding-bottom: 50px;
 }
 
 .container {
@@ -80,6 +81,15 @@ section {
 
 .centered {
   justify-content: center;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  height: 50px;;
 }
 
 @keyframes rotating {

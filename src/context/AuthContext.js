@@ -12,6 +12,7 @@ function AuthContextProvider({ children }) {
     user: null,
     status: "pending",
   });
+  const [userState, setUserState] = useState(null);
 
   const history = useHistory();
 
@@ -74,10 +75,31 @@ function AuthContextProvider({ children }) {
       .catch(e => console.error(e));
   }
 
+  // TODO: replace useEffect with call to this routine?
+  const getuser = () => {
+    const token = localStorage.getItem("token")
+    if (isTokenValid(token)) {
+      axios.get(makeUrl('/api/users/me'), makeHeaders(token))
+        .then(result => {
+          console.log("getuser: result:", result);
+          setUserState({
+            username: result.data.name,
+            email: result.data.email,
+            id: result.data.id,
+          })
+        }).catch(error => {
+          console.error(error);
+          setUserState(null);
+        })
+    }
+    return userState;
+  }
+
   const data = {
     ...authState,
     login: login,
     logout: logout,
+    getuser: getuser,
   };
 
   return (

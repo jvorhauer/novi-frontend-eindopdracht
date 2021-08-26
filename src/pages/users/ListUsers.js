@@ -5,15 +5,19 @@ import { AuthContext } from "../../context/AuthContext";
 import makeUrl from '../../helpers/MakeUrl';
 import makeHeaders from '../../helpers/MakeHeaders';
 import './ListUsers.css';
+import NotSignedIn from '../../components/errors/NotSignedIn';
 
 function ListUsers() {
   const [privateContent, setPrivateContent] = useState(null);
   const [error, setError] = useState("");
-  const { user } = useContext(AuthContext);
+  const { user, getuser } = useContext(AuthContext);
   const { page } = useParams();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+
+    console.log("usr", getuser());
+
     function getUsers() {
       setError("");
       axios.get(makeUrl(`/api/users?page=${page ? page : 0}&size=19`), makeHeaders(token))
@@ -33,13 +37,16 @@ function ListUsers() {
   return (
     <div className="content content-left">
       {error &&
-        <article className="user-error-card">
+        <article className="note-error-card">
           <h3>Foutje</h3>
           <p>
             {error}
           </p>
         </article>
       }
+      {!error && !user && (
+        <NotSignedIn />
+      )}
       {user && !error && privateContent && (
         privateContent.content.map((usr) => (
           <article className={`user-card ${usr.id === user.id ? 'self' : ''}`} key={usr.id}>

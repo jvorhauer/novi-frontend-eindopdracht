@@ -44,6 +44,10 @@
   margin: 8px;
   padding: 8px;
 }
+.user-error-card h3 {
+  text-align: center;
+  padding-left: 100px;
+}
 
 dt {
   font-weight: bold;

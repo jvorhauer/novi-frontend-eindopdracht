@@ -35,15 +35,6 @@
   color: white;
 }
 
-.note-error-card {
-  flex: 1 0 50%;
-  background-color: lightpink;
-  border: 1px solid white;
-  border-radius: 10px;
-  box-shadow: 6px 6px 3px gray;
-  margin: 8px;
-  padding: 5px;
-}
 
 dt {
   font-weight: bold;

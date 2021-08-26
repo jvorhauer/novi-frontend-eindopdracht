@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
+import NotSignedIn from '../../components/errors/NotSignedIn';
 import makeUrl from '../../helpers/MakeUrl'
 import makeHeaders from '../../helpers/MakeHeaders'
 import './Profile.css';
@@ -41,6 +42,7 @@ function Profile() {
   }
 
   useEffect(() => {
+    console.log("user", user);
     function getPrivateContent() {
       const pageNr = page ? page : 0;
       const urlparams = `page=${pageNr}&size=12`
@@ -188,21 +190,12 @@ function Profile() {
           </article>
         </>
       )}
-      {!error && !user && (
-        <article className="note-error-card">
-          <h2>U bent niet aangemeld!</h2>
-          <p>
-            Deze pagina is alleen beschikbaar voor aangemelde gebruikers!
-          </p>
-          <p>
-            Je kunt jezelf <Link to="/signin">aanmelden</Link> of{" "}
-            <Link to="/signup">registeren</Link> als je nog geen account hebt.
-          </p>
-        </article>
+      {!user && (
+        <NotSignedIn />
       )}
-      {error && (
+      {error && user && (
         <article className="note-error-card">
-          <h2 className="error">Oeps</h2>
+          <h3 className="error">Oeps</h3>
           <p>
             Er is iets niet helemaal goed gegaan tijdens het ophalen van gegevens
           </p>

@@ -36,6 +36,9 @@ function App() {
           <Route path="/view/:id/:mode" component={ViewNote} />
         </Switch>
       </div>
+      <footer>
+        <p>&copy;2021 Jurjen en NOVI</p>
+      </footer>
     </main>
   );
 }

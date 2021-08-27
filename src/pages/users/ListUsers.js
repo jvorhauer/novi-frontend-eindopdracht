@@ -32,6 +32,7 @@ function ListUsers() {
     if (token && user) {
       getUsers();
     }
+    // eslint-disable-next-line
   }, [token, user, page]);
 
   return (

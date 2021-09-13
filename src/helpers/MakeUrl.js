@@ -8,6 +8,4 @@ function makeUrl(path) {
   }
 }
 
-module.exports = makeUrl;
-
 export default makeUrl;

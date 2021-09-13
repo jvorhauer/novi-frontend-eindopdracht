@@ -9,5 +9,4 @@ function makeHeaders(token) {
   }
 }
 
-module.exports = makeHeaders;
 export default makeHeaders;

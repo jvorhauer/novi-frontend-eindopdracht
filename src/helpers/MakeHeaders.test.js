@@ -1,4 +1,4 @@
-const makeHeaders = require('./MakeHeaders');
+import makeHeaders from './MakeHeaders';
 
 test('make headers with token', () => {
   expect(makeHeaders('test')).toEqual({

@@ -1,4 +1,4 @@
-const makeUrl = require('./MakeUrl');
+import makeUrl from './MakeUrl';
 
 test('make url with path', () => {
   expect(

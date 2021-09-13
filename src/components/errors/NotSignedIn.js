@@ -18,5 +18,4 @@ const NotSignedIn = () => {
   )
 }
 
-module.exports = NotSignedIn;
 export default NotSignedIn;

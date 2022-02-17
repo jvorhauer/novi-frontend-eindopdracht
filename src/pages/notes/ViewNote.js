@@ -83,6 +83,18 @@ function ViewNote() {
     );
   }
 
+  const GoBack = () => {
+    const history = useHistory();
+
+    const goBack = () => {
+      history.goBack();
+    }
+
+    return (
+      <button onClick={goBack} className="buttonlink">notities</button>
+    )
+  }
+
   const CommentForm = () => {
     const { handleSubmit, register } = useForm();
 
@@ -145,6 +157,17 @@ function ViewNote() {
       )}
       {user && privateContent && (
         <>
+          <article className="note-card">
+            <h3><i className="fas fa-arrow-left"></i></h3>
+            <dl>
+              <dt>Terug</dt>
+              <dd>
+                naar de <GoBack />
+              </dd>
+              <dt>van</dt>
+              <dd>{privateContent.username}</dd>
+            </dl>
+          </article>
           {mode === "view" && (
             <article className="wider-note-card">
               <h3>

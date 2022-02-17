@@ -37,7 +37,7 @@ function App() {
         </Switch>
       </div>
       <footer>
-        <p>&copy;2021 Jurjen en NOVI</p>
+        <p>&copy;2022 Jurjen en NOVI</p>
       </footer>
     </main>
   );

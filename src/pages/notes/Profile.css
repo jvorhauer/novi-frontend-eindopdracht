@@ -90,3 +90,14 @@ form input {
 .flex-right {
   float: right;
 }
+
+.buttonlink {
+  text-decoration: underline;
+  border: none;
+  color: blue;
+  background-color: white;
+  font-weight: normal;
+  font-size: 15px;
+  padding: 0;
+  cursor: pointer;
+}

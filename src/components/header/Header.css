@@ -70,3 +70,6 @@ ul li a:hover {
   padding-left: 30px;
   margin-right: 30px;
 }
+.bigger .home-link {
+  color: white;
+}

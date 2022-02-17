@@ -31,20 +31,29 @@ In dit document legt de auteur van de implementatie van de eindopdracht verantwo
 
 === Tags
 
-De beloofde `tags` zitten niet in de applicatie. De reden is dat deze extra functionaliteit niet veel toevoegd aan de rest van de applicatie. Om tijd en energie te sparen heb ik er voor gekozen om dit deel helemaal over te slaan.
+De beloofde `tags` zitten niet in de applicatie. De reden is dat deze extra functionaliteit niet veel toevoegt aan de rest van de applicatie. Om tijd en energie te sparen heb ik er voor gekozen om dit deel helemaal over te slaan.
 
 == Technische keuzes
 
-=== Backend
+=== backend
 
-De backend is het resultaat van de eindopdracht voor de leerlijn 'Backend' van NOVI. Deze Java + Spring applicatie biedt een REST API voor het beheren van notities.
+De backend is het resultaat van de eindopdracht voor de leerlijn 'Backend' van NOVI. Deze Java + Spring applicatie biedt een REST API voor het beheren van notities. De source code van dit project is te vinden op https://github.com/jvorhauer/noviaal/[Github].
 
 ==== hosting
 
-Een optie is natuurlijk om de backend mee te leveren en dan maar te hopen dat zowel backend als frontend (deze eindopdracht applicatie) goed draaien.
+Een optie is om de backend mee te leveren en dan maar te hopen dat zowel backend als frontend (deze eindopdracht applicatie) goed draaien.
 
-In plaats van extra inspanning te vragen van de examinatoren, heb ik gekozen om de backend op Heroku te hosten.
+In plaats van extra inspanning te vragen van de examinatoren, heb ik gekozen om de backend op Heroku te hosten: https://sheltered-gorge-50410.herokuapp.com/[backend op Heroku]. Heroku geeft studenten de mogelijkheid om een jaar lang gratis gebruik te maken van een zg. hobby dyno, een server waarop de Noviaal backend applicatie gelukkig naar wens draait.
 
 ==== fixes
 
 Ondanks een, voor mijn gevoel, erg vleiend cijfer voor die backend eindopdracht applicatie, bleken er een paar bugs in te zitten, die inmiddels gefixed zijn. Dat wil dus wel zeggen dat de nu via Heroku beschikbare backend niet dezelfde is als de ingeleverde applicatie toendertijd.
+
+==== ervaringen
+
+Een aantal zaken zijn me opgevallen tijdens het bedenken en bouwen van deze eindopdracht frontend applicatie:
+
+1. Ik ben geen designer: gevoel voor kleuren, verhoudingen en de vertaling van ideeen hoe het er uit moet zien zijn erg anders dan mijn dagelijkse praktijk van backend ontwikkelaar.
+2. Het is erg makkelijk om te verzanden in allerlei details
+3. Prototyping met Adobe XD was een ramp. Dus leek Figma een uitkomst, zeker omdat Adobe of (waarschijnlijker) ik iets fout heb gedaan waardoor mijn originele project 'beschadigd' was. Maar ook Figma vereist geduld en oefening.
+4. Het testen van React componenten is (voor zover ik weet en kon terugvinden) niet tijdens de leerlijn behandelt. Wat er te vinden is op de interwebs sloot niet echt aan bij deze eindopdracht implementatie. Ondanks het risico van een lager cijfer heb ik besloten om het testen te beperken tot javascript functies en een voorbeeld van hoe het testen van een React component er uit zou kunnen zien; zie `NotSignedIn.test.js` en `Header.test.js`.

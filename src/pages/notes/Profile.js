@@ -36,7 +36,7 @@ function Profile() {
 
     return (
       <button onClick={() => handleClick()}>
-        <i className="fas fa-user-plus"></i>&nbsp;volg
+        <i className="fas fa-user-plus"></i>&nbsp;volg {otherUser.name}
       </button>
     );
   }
@@ -60,8 +60,9 @@ function Profile() {
         });
 
       axios.get(makeUrl(`/api/users/${userId}`), makeHeaders(token))
-        .then(other =>
-          setOtherUser(other.data))
+        .then(other => {
+          console.log("other", other);
+          setOtherUser(other.data)})
         .catch(error => {
           console.error(error);
           setError(`Ophalen van gebruikersgegevens is niet gelukt (${error})`);
@@ -180,7 +181,7 @@ function Profile() {
               </dd>
             </dl>
             {otherUser.id !== user.id && !followed &&
-              <div className="follow-button">
+              <div className="volg-button">
                 <FollowButton id={otherUser.id} />
               </div>
             }

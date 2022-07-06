@@ -34,7 +34,7 @@ Voor de Noviaal applicatie uitgevoerd kan worden is dus eerst een installatie va
 
 Voor **Windows** kan men gebruik maken van de https://nodejs.org/dist/v14.17.3/node-v14.17.3-x64.msi[Installer (64-bit)]. Na het downloaden kan dit `msi` bestand uitgevoerd worden. Na het starten van deze installer wordt de gebruiker middels eenvoudige stappen door de installatie geleid.
 
-Voor **Mac** gaat de voorkeur uit naar installeren via https://brew.sh[Homebrew]:
+Voor **Mac** gaat mijn voorkeur uit naar installeren via https://brew.sh[Homebrew]:
 
 [source]
 ----
@@ -55,17 +55,4 @@ Open nu een nieuwe tab of window in een browser en navigeer naar http://localhos
 
 == Gebruik
 
-Ondanks dat dit bestand `installatie handleiding` heet, toch een korte gebruiksaanwijzing voor Noviaal.
-
-=== registreren
-
-=== inloggen
-
-=== notities
-
-=== nieuwe notitie
-
-=== wijzigen notitie
-
-=== verwijderen notitie
-
+Voor een summiere gebruikershandlediding, zie de README.md in de root van dit project.

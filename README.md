@@ -2,17 +2,19 @@
 
 Dit is de eindopdracht van de NOVI HBO Software Development Frontend module voor groep 2021/03.
 
-Dit project bevat de documentatie en de React applicatie. De source code van dit project is te vinden op [Github frontend eindopdracht](https://github.com/jvorhauer/novi-frontend-eindopdracht).
+Dit project bevat de documentatie en de React applicatie. De broncode van dit project is te vinden op [Github frontend eindopdracht](https://github.com/jvorhauer/novi-frontend-eindopdracht).
 
 ## wireframes
 
-De wireframes zijn, zoals gevraagd, getekend op papier en daarna gefotografeerd. Het resultaat is een X-tal foto's in de 
+De wireframes zijn, zoals gevraagd, getekend op papier en daarna gefotografeerd. Het resultaat is een vijftal foto's in de 
 `wireframes` folder in de `docs` folder.
 
 ## prototype
 
 Het Figma prototype is te vinden via
 Figma: [Figma Prototype](https://www.figma.com/file/BanNpoylj79dg7Lnf6nT7v/Protoype-Eindopdracht-Novi?node-id=2%3A11)
+
+En een offline versie is beschikbaar in de directory `docs/prototype` in dit project (Prototype Eindopdracht Novi.fig)
 
 ## uitvoeren
 
@@ -24,17 +26,24 @@ npm start
 
 in de root folder van het uitgepakte of geclone-de project.
 
+### Installeren npm
+
+Indien `npm` nog niet beschikbaar is op een computer: deze applicatie wordt geinstalleerd als onderdeel van de installatie van `node`.
+
+Zie [NodeJS home](https://nodejs.org/en/) over installatie instructies van `node`.
+
 ## gebruik
 
 Na het starten van de applicatie wordt automatisch de `Home` pagina geopend in de default browser.
 
 Vandaar af zijn er twee opties: `Aanmelden` en `Registreren`.
 
-NB: mocht het automatisch opstarten niet werken, open dan een pagina in de browser met als adres [Noviaal lokaal](http://localhost:3000)
+NB: mocht het automatisch opstarten niet werken, open dan een pagina in de browser met als adres [Noviaal lokaal](http://localhost:3000) (`http://localhost:3000`)
 
 ### Registreren
 
-Vul 
+Vul
+
 * een email adres in; dat mag fictief zijn, wordt niets mee gedaan, behalve gebruikt als gebruikersnaam van een account. Het moet wel een valide email adres zijn.
 * een gebruikersnaam in. Dit mag van alles zijn, zolang het maar niet leeg gelaten wordt.
 * een wachtwoord in
@@ -49,6 +58,7 @@ Klaar. Het email adres en wachtwoord zijn direct te gebruiken voor het maken van
 Nu een account is aangemaakt kan er aangemeld worden, ook wel bekend als inloggen.
 
 Vul
+
 * het email adres van de aanmelding (zie Registreren) in,
 * het bijbehorende wachtwoord in en
 
@@ -57,6 +67,7 @@ Druk op `Inloggen`.
 ### Gebruik
 
 Na succesvol inloggen kan de gebruiker:
+
 * zijn of haar notities zien en bewerken
 * de lijst van gebruikers in zien
 * in die lijst een gebruiker kiezen en dan

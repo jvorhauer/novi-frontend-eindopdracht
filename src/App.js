@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/profile">
             <Profile />
           </Route>
-          <Route path="/profile/:id" component={Profile} />
+          <Route path="/profile/:id/:page?" component={Profile} />
           <Route exact path="/users">
             <ListUsers />
           </Route>

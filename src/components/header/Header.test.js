@@ -17,7 +17,7 @@ const server = setupServer(
 
 test('header without user should show signin/up links', () => {
   render(<Router><Header /></Router>);
-  expect(screen.getAllByRole('link')).toHaveLength(2);
+  expect(screen.getAllByRole('link')).toHaveLength(3);
 });
 
 test('header with user should show navigation links', () => {

@@ -46,7 +46,7 @@ function Profile() {
     function getPrivateContent() {
       const pageNr = page ? page : 0;
       const urlparams = `page=${pageNr}&size=12`
-      const url = id ? makeUrl(`/api/notes/user/${id}?${urlparams}`) : makeUrl(`/api/users/timeline?${urlparams}`);
+      const url = id && (id !== user.id) ? makeUrl(`/api/notes/user/${id}?${urlparams}`) : makeUrl(`/api/users/timeline?${urlparams}`);
       const userId = id ? id : user.id;
 
       setError("");
@@ -86,7 +86,7 @@ function Profile() {
     if (isLast) {
       return <span className="link-disabled" title="Er is geen volgende pagina">Volgende</span>
     } else {
-      return <Link to={`/profile/${userId}/${privateContent.number + 1}`}>Vorige</Link>
+      return <Link to={`/profile/${userId}/${privateContent.number + 1}`}>Volgende</Link>
     }
   }
 
@@ -136,7 +136,6 @@ function Profile() {
     );
   }
 
-
   return (
     <div className="content content-left">
       {!error && otherUser && privateContent && (
@@ -150,7 +149,9 @@ function Profile() {
                 {makePrevLink(otherUser.id, privateContent.first)}
               </dd>
               <dt>Pagina</dt>
-              <dd>Nu op {privateContent.number + 1} van {privateContent.totalPages}</dd>
+              <dd>Nu op pagina {privateContent.number + 1} van {privateContent.totalPages}</dd>
+              <dt>Notities (incl. gevolgden)</dt>
+              <dd>{privateContent.totalElements}</dd>
             </dl>
           </article>
           <article className="note-card user">
@@ -226,7 +227,7 @@ function Profile() {
           }
           {user.id === otherUser.id &&
             <article className="wider-note-card">
-              <h3>Nieuwe notitie</h3>
+              <h3><i className="fas fa-plus-circle"></i> Nieuwe notitie</h3>
               <NewNoteForm />
             </article>
           }
@@ -236,11 +237,11 @@ function Profile() {
             <dl>
               <dt>Ga naar</dt>
               <dd>
-                <Link to={`/profile/${otherUser.id}/{privateContent.totalPages - 1}`}>Laatste</Link> of<br />
+                <Link to={`/profile/${otherUser.id}/${privateContent.totalPages - 1}`}>Laatste</Link> of<br />
                 {makeNextLink(otherUser.id, privateContent.last)}
               </dd>
               <dt>Pagina</dt>
-              <dd>Nu op {privateContent.number + 1} van {privateContent.totalPages}</dd>
+              <dd>Nu op pagina {privateContent.number + 1} van {privateContent.totalPages}</dd>
             </dl>
           </article>
         </>)

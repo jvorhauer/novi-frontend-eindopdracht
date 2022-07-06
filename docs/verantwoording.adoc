@@ -57,3 +57,4 @@ Een aantal zaken zijn me opgevallen tijdens het bedenken en bouwen van deze eind
 2. Het is erg makkelijk om te verzanden in allerlei details
 3. Prototyping met Adobe XD was een ramp. Dus leek Figma een uitkomst, zeker omdat Adobe of (waarschijnlijker) ik iets fout heb gedaan waardoor mijn originele project 'beschadigd' was. Maar ook Figma vereist geduld en oefening.
 4. Het testen van React componenten is (voor zover ik weet en kon terugvinden) niet tijdens de leerlijn behandelt. Wat er te vinden is op de interwebs sloot niet echt aan bij deze eindopdracht implementatie. Ondanks het risico van een lager cijfer heb ik besloten om het testen te beperken tot javascript functies en een voorbeeld van hoe het testen van een React component er uit zou kunnen zien; zie `NotSignedIn.test.js` en `Header.test.js`.
+5. Blijkbaar is het voor mij te lastig om deze opdracht te uploaden naar Teams. Daardoor is het inlever moment vér na de deadline. Waarvoor excuses.

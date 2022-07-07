@@ -49,7 +49,7 @@ function ViewNote() {
       }
       console.log("data", data, "payload", payload);
       axios.put(makeUrl(`/api/notes/${id}`), payload, makeHeaders(token))
-        .then(result => {
+        .then(() => {
           reset({
             comment: "",
             title: privateContent.title,
@@ -104,12 +104,14 @@ function ViewNote() {
         stars: data.stars
       };
       axios.post(makeUrl(`/api/notes/${id}/comments`), payload, makeHeaders(token))
-        .then(result => setUpdated(true))
+        .then(result => {
+          setUpdated(result.status === 200);
+        })
         .catch(error => console.error(error));
     }
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="comment-form">
+      <form id="new-comment-form" onSubmit={handleSubmit(onSubmit)} className="comment-form">
         <label htmlFor="comment-field">
           Commentaar:
           <input
@@ -118,7 +120,7 @@ function ViewNote() {
             size="20"
             name="comment"
             placeholder="commentaar"
-            {...register("comment", { required: true, minLength: 10, maxLength: 100 })} />
+            {...register("comment", { required: true, minLength: 3, maxLength: 100 })} />
         </label>
         <label htmlFor="stars-field">
           Waardering:<br />

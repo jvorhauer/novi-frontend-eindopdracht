@@ -47,7 +47,6 @@ function ViewNote() {
         body: data.body,
         userId: user.id
       }
-      console.log("data", data, "payload", payload);
       axios.put(makeUrl(`/api/notes/${id}`), payload, makeHeaders(token))
         .then(() => {
           reset({
@@ -84,14 +83,8 @@ function ViewNote() {
   }
 
   const GoBack = () => {
-    const history = useHistory();
-
-    const goBack = () => {
-      history.goBack();
-    }
-
     return (
-      <button onClick={goBack} className="buttonlink">notities</button>
+        <a href="/profile">notities</a>
     )
   }
 

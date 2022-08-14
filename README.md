@@ -30,7 +30,7 @@ in de root folder van het uitgepakte of geclone-de project.
 
 Indien `npm` nog niet beschikbaar is op een computer: deze applicatie wordt geinstalleerd als onderdeel van de installatie van `node`.
 
-Zie [NodeJS home](https://nodejs.org/en/) over installatie instructies van `node`.
+Zie [NodeJS home](https://nodejs.org/en/) over installatie-instructies van `node`.
 
 ## gebruik
 

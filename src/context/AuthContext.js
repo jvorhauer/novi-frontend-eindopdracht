@@ -37,8 +37,7 @@ function AuthContextProvider({ children }) {
         status: "done",
       });
     }
-    // eslint-disable-next-line
-  }, []);     // warning here: missing dependencies, which when included make the app completely unusable.
+  }, []);
 
   function login(jwtToken) {
     console.log("login", jwtToken);
